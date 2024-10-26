@@ -1,11 +1,12 @@
 import React from 'react'
 
-import { Text, View } from 'react-native'
+import Text from '@/components/Text'
+import View from '@/components/View'
 
 const NotFound = () => {
   return (
     <View>
-      <Text>This screen doesn't exist.</Text>
+      <Text>Not found</Text>
     </View>
   )
 }
