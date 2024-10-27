@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Switch as RNSwitch } from 'react-native'
+import { Switch as RNSwitch, StyleSheet } from 'react-native'
 
 import View from './View'
 
@@ -13,9 +13,8 @@ const Switch = (props: Props) => {
   const { enabled, onToggle } = props
 
   return (
-    <View className="flex flex-0 px-[8px]">
+    <View style={styles.switchContainer}>
       <RNSwitch
-        className="bg-red-500"
         trackColor={{ false: '#E9E9EB', true: '#32D74B' }}
         thumbColor="#FFFFFF"
         ios_backgroundColor="#E9E9EB"
@@ -27,3 +26,9 @@ const Switch = (props: Props) => {
 }
 
 export default Switch
+
+const styles = StyleSheet.create({
+  switchContainer: {
+    paddingHorizontal: 8,
+  },
+})

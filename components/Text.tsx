@@ -1,23 +1,27 @@
 import React, { ReactNode } from 'react'
 
-import { Text as RNText, TextStyle } from 'react-native'
+import { Text as RNText, StyleSheet, TextStyle } from 'react-native'
 
 type Props = {
   children?: ReactNode
-  className?: string
   style?: TextStyle
 }
 
 const Text = (props: Props) => {
-  const { children, className } = props
-
-  const style = `font-regular leading-[2] ${className}`
+  const { children, style } = props
 
   return (
-    <RNText className={style} {...props}>
+    <RNText {...props} style={[styles.text, style]}>
       {children}
     </RNText>
   )
 }
 
 export default Text
+
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'SFRegular',
+    fontSize: 14,
+  },
+})

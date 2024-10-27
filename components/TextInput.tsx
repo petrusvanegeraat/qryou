@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 
-import { TextInput } from 'react-native'
+import { StyleSheet, TextInput } from 'react-native'
 
 import { Field } from '@/types'
 
@@ -9,47 +9,60 @@ import View from './View'
 
 type Props = {
   input: Field
-  handleChange: (input: Field) => void
+  handleFieldChange?: (input: Field) => void
+  showToggle?: boolean
 }
 
 const TextField = (props: Props) => {
-  const { input, handleChange } = props
+  const { input, handleFieldChange, showToggle = false } = props
 
   const { enabled, placeholder, value } = input
 
   const onChangeText = (text: string) => {
-    handleChange({
+    if (!handleFieldChange) return
+    handleFieldChange({
       ...input,
       value: text,
     })
   }
 
   const onToggle = () => {
-    handleChange({
+    if (!handleFieldChange) return
+    handleFieldChange({
       ...input,
       enabled: !enabled,
     })
   }
 
-  // some NativeWind v4 classes are unreliable still, temporarely fixing them by using good-ol' style
   return (
-    <View
-      style={{ borderColor: '#C6C6C8' }}
-      className="flex flex-row items-center border-b-[0.5px] bg-white">
+    <View style={styles.textInputContainer}>
       <TextInput
-        style={{
-          paddingHorizontal: 12,
-        }}
+        editable={showToggle}
+        style={styles.textInput}
         autoCorrect={false}
-        className="flex flex-1 h-[64px]"
         placeholder={placeholder}
         value={value}
         multiline={false}
         onChangeText={onChangeText}
       />
-      <Switch enabled={enabled} onToggle={onToggle} />
+      {showToggle && <Switch enabled={enabled} onToggle={onToggle} />}
     </View>
   )
 }
 
 export default memo(TextField)
+
+const styles = StyleSheet.create({
+  textInputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 0.5,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#C6C6C8',
+    paddingHorizontal: 12,
+  },
+  textInput: {
+    height: 66,
+    flex: 1,
+  },
+})

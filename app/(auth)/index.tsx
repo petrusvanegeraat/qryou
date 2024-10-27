@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Pressable } from 'react-native'
+import { Pressable, StyleSheet } from 'react-native'
 
 import { router } from 'expo-router'
 
@@ -9,7 +9,7 @@ import View from '@/components/View'
 
 const WelcomeScreen = () => {
   return (
-    <View className="flex-1 justify-center items-center">
+    <View style={styles.container}>
       <Text>Welcome screen</Text>
       <Pressable onPress={() => router.navigate('/sign-in')}>
         <Text>Sign in</Text>
@@ -19,3 +19,11 @@ const WelcomeScreen = () => {
 }
 
 export default WelcomeScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+})
